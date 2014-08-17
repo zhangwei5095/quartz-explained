@@ -18,15 +18,15 @@
 
 package org.quartz;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import org.quartz.Trigger.TriggerState;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.quartz.spi.JobFactory;
 import org.quartz.utils.Key;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * This is the main interface of a Quartz Scheduler.
@@ -421,11 +421,15 @@ public interface Scheduler {
     /**
      * Schedule the given <code>{@link org.quartz.Trigger}</code> with the
      * <code>Job</code> identified by the <code>Trigger</code>'s settings.
+     *
+     * 调度trigger，job来自于trigger的配置
      * 
      * @throws SchedulerException
      *           if the indicated Job does not exist, or the Trigger cannot be
      *           added to the Scheduler, or there is an internal Scheduler
      *           error.
+     *           如果与trigger关联的job不存在，或者trigger不能添加到scheduler中，
+     *           或者scheduler内部发生了错误，则抛出SchedulerException。
      */
     Date scheduleJob(Trigger trigger) throws SchedulerException;
 

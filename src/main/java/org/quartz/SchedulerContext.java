@@ -18,15 +18,18 @@
 
 package org.quartz;
 
+import org.quartz.utils.StringKeyDirtyFlagMap;
+
 import java.io.Serializable;
 import java.util.Map;
-
-import org.quartz.utils.StringKeyDirtyFlagMap;
 
 /**
  * Holds context/environment data that can be made available to Jobs as they
  * are executed. This feature is much like the ServletContext feature when
  * working with J2EE servlets.
+ *
+ * 保存上下文环境的数据，这些数据在job执行的时候是可以获取到的；功能类似于J2EE servlet
+ * 中的ServletContext；
  * 
  * <p>
  * Future versions of Quartz may make distinctions on how it propagates

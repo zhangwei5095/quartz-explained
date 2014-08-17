@@ -42,6 +42,8 @@ public interface ListenerManager {
      * and register it to receive events for all Jobs.
      * 
      * Because no matchers are provided, the <code>EverythingMatcher</code> will be used.
+     *
+     * 添加jobListener，接收所有job的事件；因为没有指定任何matcher，所以默认使用EverythingMatcher。
      * 
      * @see Matcher
      * @see org.quartz.impl.matchers.EverythingMatcher

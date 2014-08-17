@@ -15,6 +15,14 @@
  */
 package org.quartz;
 
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.number.OrderingComparison.greaterThanOrEqualTo;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.quartz.impl.StdSchedulerFactory;
+import org.quartz.listeners.JobListenerSupport;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -23,14 +31,6 @@ import java.util.Properties;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.quartz.impl.StdSchedulerFactory;
-import org.quartz.listeners.JobListenerSupport;
-
-import static org.hamcrest.number.OrderingComparison.greaterThanOrEqualTo;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 
 /**
  * Integration test for using DisallowConcurrentExecution annot.
@@ -50,12 +50,12 @@ public class DisallowConcurrentExecutionJobTest {
 			try {
 				@SuppressWarnings("unchecked")
 				List<Date> jobExecDates = (List<Date>)context.getScheduler().getContext().get(DATE_STAMPS);
-                                long firedAt = System.currentTimeMillis();
+                long firedAt = System.currentTimeMillis();
 				jobExecDates.add(new Date(firedAt));
-                                long sleepTill = firedAt + JOB_BLOCK_TIME;
-                                for (long sleepFor = sleepTill - System.currentTimeMillis(); sleepFor > 0; sleepFor = sleepTill - System.currentTimeMillis()) {
-                                  Thread.sleep(sleepFor);
-                                }
+                long sleepTill = firedAt + JOB_BLOCK_TIME;
+                for (long sleepFor = sleepTill - System.currentTimeMillis(); sleepFor > 0; sleepFor = sleepTill - System.currentTimeMillis()) {
+                  Thread.sleep(sleepFor);
+                }
 			} catch (InterruptedException e) {
 				throw new JobExecutionException("Failed to pause job for testing.");
 			} catch (SchedulerException e) {
@@ -121,11 +121,11 @@ public class DisallowConcurrentExecutionJobTest {
 		barrier.await(125, TimeUnit.SECONDS);
 		
 		scheduler.shutdown(true);
-		
-                Assert.assertThat(jobExecDates, hasSize(2));
-                long fireTimeTrigger1 = jobExecDates.get(0).getTime();
-                long fireTimeTrigger2 = jobExecDates.get(1).getTime();
-                Assert.assertThat(fireTimeTrigger2 - fireTimeTrigger1, greaterThanOrEqualTo(JOB_BLOCK_TIME));
+
+        Assert.assertThat(jobExecDates, hasSize(2));
+        long fireTimeTrigger1 = jobExecDates.get(0).getTime();
+        long fireTimeTrigger2 = jobExecDates.get(1).getTime();
+        Assert.assertThat(fireTimeTrigger2 - fireTimeTrigger1, greaterThanOrEqualTo(JOB_BLOCK_TIME));
 	}
 	
 	/** QTZ-202 */
@@ -160,9 +160,9 @@ public class DisallowConcurrentExecutionJobTest {
 		
 		scheduler.shutdown(true);
 		
-                Assert.assertThat(jobExecDates, hasSize(2));
-                long fireTimeTrigger1 = jobExecDates.get(0).getTime();
-                long fireTimeTrigger2 = jobExecDates.get(1).getTime();
-                Assert.assertThat(fireTimeTrigger2 - fireTimeTrigger1, greaterThanOrEqualTo(JOB_BLOCK_TIME));
+        Assert.assertThat(jobExecDates, hasSize(2));
+        long fireTimeTrigger1 = jobExecDates.get(0).getTime();
+        long fireTimeTrigger2 = jobExecDates.get(1).getTime();
+        Assert.assertThat(fireTimeTrigger2 - fireTimeTrigger1, greaterThanOrEqualTo(JOB_BLOCK_TIME));
 	}
 }

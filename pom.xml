@@ -2,18 +2,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.quartz-scheduler</groupId>
-    <artifactId>quartz-parent</artifactId>
-    <version>2.2.2-SNAPSHOT</version>
-  </parent>
+  <!--<parent>-->
+    <!--<groupId>org.quartz-scheduler</groupId>-->
+    <!--<artifactId>quartz-parent</artifactId>-->
+    <!--<version>2.2.2-SNAPSHOT</version>-->
+  <!--</parent>-->
 
   <groupId>org.quartz-scheduler.internal</groupId>
   <artifactId>quartz-core</artifactId>
+  <version>2.2.2-SNAPSHOT</version>
   <name>quartz-core</name>
 
   <properties>
-	<derby-version>10.8.2.2</derby-version>
+    <derby-version>10.8.2.2</derby-version>
+      
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <skipDeploy>false</skipDeploy>
+      <skipJavadoc>false</skipJavadoc>
+      <skipCheckstyle>false</skipCheckstyle>
+
+      <slf4j.version>1.7.7</slf4j.version>
+      <c3p0.version>0.9.1.1</c3p0.version>
+      <log4j.version>1.2.16</log4j.version>
+      <maven-forge-plugin.version>1.1.9</maven-forge-plugin.version>
+      <gmaven-plugin.version>1.4</gmaven-plugin.version>
+      <checkstyle-suppressions-file>suppressions.xml</checkstyle-suppressions-file>
+      <checkstyle-config-file>checkstyle.xml</checkstyle-config-file>
+      <checkstyle-header-file>header.txt</checkstyle-header-file>
+
+      <terracotta-snapshots-url>http://nexus.terracotta.eur.ad.sag/content/repositories/terracotta-snapshots</terracotta-snapshots-url>
+      <terracotta-staging-url>http://nexus.terracotta.eur.ad.sag/content/repositories/terracotta-staging</terracotta-staging-url>
+      <terracotta-releases-url>http://nexus.terracotta.eur.ad.sag/content/repositories/terracotta-releases</terracotta-releases-url>
   </properties>
 
   <dependencies>

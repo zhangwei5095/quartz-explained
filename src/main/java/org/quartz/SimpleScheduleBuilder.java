@@ -297,7 +297,9 @@ public class SimpleScheduleBuilder extends ScheduleBuilder<SimpleTrigger> {
     
     /**
      * Specify a repeat interval in minutes - which will then be multiplied
-     * by 60 * 1000 to produce milliseconds. 
+     * by 60 * 1000 to produce milliseconds.
+     *
+     * 以分钟为单位设置重复的时间间隔， 分钟会被转换为毫秒
      * 
      * @param intervalInMinutes the number of seconds at which the trigger should repeat.
      * @return the updated SimpleScheduleBuilder
