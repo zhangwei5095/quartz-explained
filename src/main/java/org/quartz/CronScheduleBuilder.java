@@ -17,11 +17,11 @@
 
 package org.quartz;
 
-import java.text.ParseException;
-import java.util.TimeZone;
-
 import org.quartz.impl.triggers.CronTriggerImpl;
 import org.quartz.spi.MutableTrigger;
+
+import java.text.ParseException;
+import java.util.TimeZone;
 
 /**
  * <code>CronScheduleBuilder</code> is a {@link ScheduleBuilder} that defines
@@ -94,6 +94,10 @@ public class CronScheduleBuilder extends ScheduleBuilder<CronTrigger> {
      * Create a CronScheduleBuilder with the given cron-expression string -
      * which is presumed to b e valid cron expression (and hence only a
      * RuntimeException will be thrown if it is not).
+     *
+     * 通过参数表示的cron表达式创建一个CronScheduleBuilder实例，如果参数不是合法
+     * 的cron表达式，则会抛出RuntimeException；(提示：可以通过
+     * CronExpression.isValidExpression()方法判断cron表达式是否合法)
      * 
      * @param cronExpression
      *            the cron expression string to base the schedule on.

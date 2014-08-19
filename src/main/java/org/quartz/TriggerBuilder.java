@@ -17,10 +17,10 @@
 
 package org.quartz;
 
-import java.util.Date;
-
 import org.quartz.spi.MutableTrigger;
 import org.quartz.utils.Key;
+
+import java.util.Date;
 
 /**
  * <code>TriggerBuilder</code> is used to instantiate {@link Trigger}s.
@@ -90,6 +90,14 @@ public class TriggerBuilder<T extends Trigger> {
     
     /**
      * Produce the <code>Trigger</code>.
+     *
+     * 构建trigger实例，对于没有通过builder设置的参数，有的使用默认值，
+     * 有的临时创建：
+     *  - 如果key为null，key的name通过createUniqueName()创建一个唯一值，
+     *  key的group使用默认值：DEFAULT;
+     *  - priority默认值为：5；
+     *  - schedulerBuilder没有设置时，创建一个SimpleScheduleBuilder实例；
+     *  - startTime默认为当前时刻；
      * 
      * @return a Trigger that meets the specifications of the builder.
      */
@@ -123,6 +131,8 @@ public class TriggerBuilder<T extends Trigger> {
      * 
      * <p>If none of the 'withIdentity' methods are set on the TriggerBuilder,
      * then a random, unique TriggerKey will be generated.</p>
+     *
+     * 根据name和默认的group(即"DEFAULT")创建trigger的key
      * 
      * @param name the name element for the Trigger's TriggerKey
      * @return the updated TriggerBuilder
@@ -170,6 +180,8 @@ public class TriggerBuilder<T extends Trigger> {
 
     /**
      * Set the given (human-meaningful) description of the Trigger.
+     *
+     * 给trigger添加描述，默认为null，所以是可选的
      * 
      * @param triggerDescription the description for the Trigger
      * @return the updated TriggerBuilder
@@ -184,6 +196,9 @@ public class TriggerBuilder<T extends Trigger> {
      * Set the Trigger's priority.  When more than one Trigger have the same
      * fire time, the scheduler will fire the one with the highest priority
      * first.
+     *
+     * 设置trigger的优先级，默认为5；如果有多个trigger同时触发，则优先级高的trigger
+     * 会优先被触发；
      * 
      * @param triggerPriority the priority for the Trigger
      * @return the updated TriggerBuilder
@@ -240,7 +255,10 @@ public class TriggerBuilder<T extends Trigger> {
 
     /**
      * Set the time at which the Trigger will no longer fire - even if it's
-     * schedule has remaining repeats.    
+     * schedule has remaining repeats.
+     *
+     * 设置trigger终止触发的时间点，即过了这个时间戳，即使还存在重复的调度，trigger也不会
+     * 触发；如果参数为null，则表示不限制终止时间，endTime默认值就是null；
      *  
      * @param triggerEndTime the end time for the Trigger.  If null, the end time is indefinite.
      * @return the updated TriggerBuilder

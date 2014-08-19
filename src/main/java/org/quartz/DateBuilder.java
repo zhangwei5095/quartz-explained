@@ -687,6 +687,8 @@ public class DateBuilder {
      * <p>
      * Returns a date that is rounded to the next even second after the current time.
      * </p>
+     *
+     * 返回当前时刻的下一秒所表示的时间
      * 
      * @return the new rounded date
      */

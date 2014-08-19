@@ -51,6 +51,9 @@ public class Key<T>  implements Serializable, Comparable<Key<T>> {
 
     /**
      * Construct a new key with the given name and group.
+     *
+     * 通过name和group参数构造一个Key对象，如果name为null，抛出
+     *  异常，如果group为null，则使用默认的group：DEFAULT;
      * 
      * @param name
      *          the name
@@ -155,7 +158,13 @@ public class Key<T>  implements Serializable, Comparable<Key<T>> {
         
         return name.compareTo(o.getName());
     }
-    
+
+    /**
+     * 创建唯一的串作为key，如果group为null，则使用默认的group：DEFAULT
+     *
+     * @param group
+     * @return
+     */
     public static String createUniqueName(String group) {
         if(group == null)
             group = DEFAULT_GROUP;
