@@ -971,13 +971,23 @@ public class DateBuilder {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
+    /**
+     * 验证`星期`字段是否合法
+     *
+     * @param dayOfWeek
+     */
     public static void validateDayOfWeek(int dayOfWeek) {
         if (dayOfWeek < SUNDAY || dayOfWeek > SATURDAY) {
             throw new IllegalArgumentException("Invalid day of week.");
         }
     }
 
+    /**
+     * `小时`的合法范围：[0,23]
+     *
+     * @param hour
+     */
     public static void validateHour(int hour) {
         if (hour < 0 || hour > 23) {
             throw new IllegalArgumentException(
@@ -985,6 +995,11 @@ public class DateBuilder {
         }
     }
 
+    /**
+     * `分钟`的合法范围：[0,59]
+     *
+     * @param minute
+     */
     public static void validateMinute(int minute) {
         if (minute < 0 || minute > 59) {
             throw new IllegalArgumentException(

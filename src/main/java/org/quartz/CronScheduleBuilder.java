@@ -185,7 +185,10 @@ public class CronScheduleBuilder extends ScheduleBuilder<CronTrigger> {
      * Create a CronScheduleBuilder with a cron-expression that sets the
      * schedule to fire at the given day at the given time (hour and minute) on
      * the given days of the week.
-     * 
+     *
+     * 通过`分钟`、`小时`、`周`创建一个CronScheduleBuilder实例，即在某一天的给定时刻
+     * (通过`分钟`、`小时`指定)执行，，而天数由`周`确定，如果“周二、周四的10:05“等；
+     *
      * @param daysOfWeek
      *            the dasy of the week to fire
      * @param hour

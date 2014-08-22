@@ -26,11 +26,17 @@ import java.lang.annotation.Target;
 /**
  * An annotation that marks a {@link Job} class as one that makes updates to its
  * {@link JobDataMap} during execution, and wishes the scheduler to re-store the
- * <code>JobDataMap</code> when execution completes. 
+ * <code>JobDataMap</code> when execution completes.
+ *
+ * 该注解表明：当scheduler执行该job的同时更新job关联的JobDataMap，job执行完之后，保存
+ *  更新后的JobDataMap；则该job下次被执行的时候，使用的是更新后的JobDataMap；
  *   
  * <p>Jobs that are marked with this annotation should also seriously consider
  * using the {@link DisallowConcurrentExecution} annotation, to avoid data
  * storage race conditions with concurrently executing job instances.</p>
+ *
+ * 当使用该注解的时候，建议与DisallowConcurrentExecution注解同时使用，避免由于多线程
+ *  同时执行该job导致JobDataMap数据的不一致；
  *
  * @see DisallowConcurrentExecution
  * 

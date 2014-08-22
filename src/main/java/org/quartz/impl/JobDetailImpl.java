@@ -103,6 +103,9 @@ public class JobDetailImpl implements Cloneable, java.io.Serializable, JobDetail
      * Create a <code>JobDetail</code> with no specified name or group, and
      * the default settings of all the other properties.
      * </p>
+     *
+     * 默认构造函数，使用默认配置；如果使用这个构造函数，则必须先调用setName(),
+     *  setGroup()和setJobClass()三个方法；
      * 
      * <p>
      * Note that the {@link #setName(String)},{@link #setGroup(String)}and
@@ -119,6 +122,8 @@ public class JobDetailImpl implements Cloneable, java.io.Serializable, JobDetail
      * Create a <code>JobDetail</code> with the given name, given class, default group, 
      * and the default settings of all the other properties.
      * </p>
+     *
+     * 设置name属性和jobClass属性，其它属性使用默认值，构造一个JobDetail实例；
      * 
      * @exception IllegalArgumentException
      *              if name is null or empty, or the group is an empty string.
@@ -134,6 +139,8 @@ public class JobDetailImpl implements Cloneable, java.io.Serializable, JobDetail
      * Create a <code>JobDetail</code> with the given name, group and class, 
      * and the default settings of all the other properties.
      * </p>
+     *
+     * 设置name、group和JobClass属性，其它属性使用默认值，构造一个JobDetail实例；
      * 
      * @param group if <code>null</code>, Scheduler.DEFAULT_GROUP will be used.
      * 
@@ -153,6 +160,8 @@ public class JobDetailImpl implements Cloneable, java.io.Serializable, JobDetail
      * Create a <code>JobDetail</code> with the given name, and group, and
      * the given settings of all the other properties.
      * </p>
+     *
+     * 通过给定的参数配置，构造一个JobDetail实例；
      * 
      * @param group if <code>null</code>, Scheduler.DEFAULT_GROUP will be used.
      * 
@@ -191,6 +200,8 @@ public class JobDetailImpl implements Cloneable, java.io.Serializable, JobDetail
      * <p>
      * Set the name of this <code>Job</code>.
      * </p>
+     *
+     * 设置job的name属性，不能为null或空串；
      * 
      * @exception IllegalArgumentException
      *              if name is null or empty.
@@ -217,6 +228,8 @@ public class JobDetailImpl implements Cloneable, java.io.Serializable, JobDetail
      * <p>
      * Set the group of this <code>Job</code>.
      * </p>
+     *
+     * 设置job的group属性，不能为空，如果为null，则使用默认值：DEFAULT；
      * 
      * @param group if <code>null</code>, Scheduler.DEFAULT_GROUP will be used.
      * 
@@ -259,7 +272,12 @@ public class JobDetailImpl implements Cloneable, java.io.Serializable, JobDetail
 
         return key;
     }
-    
+
+    /**
+     * 设置job的key，不能为null；
+     *
+     * @param key
+     */
     public void setKey(JobKey key) {
         if(key == null)
             throw new IllegalArgumentException("Key cannot be null!");
@@ -281,6 +299,8 @@ public class JobDetailImpl implements Cloneable, java.io.Serializable, JobDetail
      * Set a description for the <code>Job</code> instance - may be useful
      * for remembering/displaying the purpose of the job, though the
      * description has no meaning to Quartz.
+     *
+     * 设置job的描述信息，可以描述job的目的，没有实际作用；
      * </p>
      */
     public void setDescription(String description) {
@@ -298,6 +318,9 @@ public class JobDetailImpl implements Cloneable, java.io.Serializable, JobDetail
      * <p>
      * Set the instance of <code>Job</code> that will be executed.
      * </p>
+     *
+     * 设置job的jobClass属性，不能为null；且参数所代表的类必须是Job类
+     *  的实现类或子类；
      * 
      * @exception IllegalArgumentException
      *              if jobClass is null or the class is not a <code>Job</code>.
@@ -390,6 +413,9 @@ public class JobDetailImpl implements Cloneable, java.io.Serializable, JobDetail
 
     /* (non-Javadoc)
      * @see org.quartz.JobDetailI#requestsRecovery()
+     *
+     * 设置该JobDetail的可恢复性，即当系统从故障中恢复后，该JobDetail是否被scheduler
+     *  重新调度执行；默认值为false；
      */
     public boolean requestsRecovery() {
         return shouldRecover;
@@ -447,6 +473,11 @@ public class JobDetailImpl implements Cloneable, java.io.Serializable, JobDetail
         return copy;
     }
 
+    /**
+     * 返回可以创建当前JobDetail实例的JobBuilder
+     *
+     * @return
+     */
     public JobBuilder getJobBuilder() {
         JobBuilder b = JobBuilder.newJob()
             .ofType(getJobClass())
