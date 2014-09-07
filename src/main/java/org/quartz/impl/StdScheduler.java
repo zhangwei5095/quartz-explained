@@ -17,11 +17,6 @@
 
 package org.quartz.impl;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import org.quartz.Calendar;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
@@ -33,12 +28,17 @@ import org.quartz.SchedulerContext;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerMetaData;
 import org.quartz.Trigger;
+import org.quartz.Trigger.TriggerState;
 import org.quartz.TriggerKey;
 import org.quartz.UnableToInterruptJobException;
-import org.quartz.Trigger.TriggerState;
 import org.quartz.core.QuartzScheduler;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.quartz.spi.JobFactory;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>
@@ -46,6 +46,9 @@ import org.quartz.spi.JobFactory;
  * proxies all method calls to the equivalent call on a given <code>QuartzScheduler</code>
  * instance.
  * </p>
+ *
+ * 实现了Scheduler接口，内部所有的方法调用都转发给了QuartzScheduler，代理模式的典型
+ *  应用；
  * 
  * @see org.quartz.Scheduler
  * @see org.quartz.core.QuartzScheduler
@@ -58,6 +61,8 @@ public class StdScheduler implements Scheduler {
      * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * 
      * Data members.
+     *
+     * QuartzScheduler实例
      * 
      * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */

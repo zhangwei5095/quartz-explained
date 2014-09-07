@@ -17,11 +17,11 @@
 
 package org.quartz.impl;
 
-import java.util.Collection;
-import java.util.HashMap;
-
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
+
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * <p>
@@ -29,6 +29,9 @@ import org.quartz.SchedulerException;
  * preventing garbage collection, and allowing 'global' lookups - all within a
  * ClassLoader space.
  * </p>
+ *
+ * 实例仓库：保存所有已创建的scheduler实例；内部通过HashMap实现，key为scheduler名称，
+ *  value为scheduler实例：确保全局的唯一性，防止被垃圾回收，同时用于全局的查找；
  * 
  * @author James House
  */
@@ -50,6 +53,8 @@ public class SchedulerRepository {
      * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * 
      * Constructors.
+     *
+     * 私有的构造函数，无法从外部创建实例；
      * 
      * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
@@ -62,6 +67,8 @@ public class SchedulerRepository {
      * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * 
      * Interface.
+     *
+     * 单例模式
      * 
      * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
@@ -74,6 +81,12 @@ public class SchedulerRepository {
         return inst;
     }
 
+    /**
+     * 将scheduler添加到HashMap中，如果该scheduler在HashMap中已存在，抛异常；
+     *
+     * @param sched
+     * @throws SchedulerException
+     */
     public synchronized void bind(Scheduler sched) throws SchedulerException {
 
         if ((Scheduler) schedulers.get(sched.getSchedulerName()) != null) {
@@ -88,6 +101,12 @@ public class SchedulerRepository {
         return (schedulers.remove(schedName) != null);
     }
 
+    /**
+     * 通过scheduler的名称查询对应的scheduler实例；
+     *
+     * @param schedName
+     * @return
+     */
     public synchronized Scheduler lookup(String schedName) {
         return schedulers.get(schedName);
     }

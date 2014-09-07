@@ -28,6 +28,14 @@ import java.lang.annotation.Target;
  * instances executed concurrently (where instance is based-upon a {@link JobDetail} 
  * definition - or in other words based upon a {@link JobKey}).
  *
+ * 这个注解表示不能在同一时刻执行同一个JobDetail的多个实例；这个注解是用在Job上的，但是
+ *  这个并发性的限制是针对JobDetail的。
+ *
+ * 为了帮助理解，举个简单的例子：加入我们定义了一个job，叫CacheJob，并在该job上使用本注解，
+ *  然后我们定义了两个JobDetail实例，分别为MemcachedJobDetail和RedisJobDetail，这个注解
+ *  的限制就是：我们不能同时执行多个MemcachedJobDetail的实例，但是我们在执行MemcachedJobDetail
+ *  实例时，是可以同时执行RedisJobDetail实例的。
+ *
  * @see PersistJobDataAfterExecution
  * 
  * @author jhouse

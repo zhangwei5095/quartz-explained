@@ -313,6 +313,8 @@ public class StdSchedulerFactory implements SchedulerFactory {
 
     /**
      * Create an uninitialized StdSchedulerFactory.
+     *
+     * 创建一个未初始化的StdSchedulerFactory
      */
     public StdSchedulerFactory() {
     }
@@ -1520,6 +1522,8 @@ public class StdSchedulerFactory implements SchedulerFactory {
      * <p>
      * Returns a handle to the Scheduler produced by this factory.
      * </p>
+     *
+     * 使用默认配置，创建一个Scheduler实例；
      *
      * <p>
      * If one of the <code>initialize</code> methods has not be previously

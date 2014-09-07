@@ -30,6 +30,8 @@ import java.io.Serializable;
  * Quartz does not store an actual instance of a <code>Job</code> class, but
  * instead allows you to define an instance of one, through the use of a <code>JobDetail</code>.
  * </p>
+ *
+ * quartz并不能直接定义Job实例，而是通过JobDetail来定义Job实例；
  * 
  * <p>
  * <code>Job</code>s have a name and group associated with them, which
@@ -83,6 +85,7 @@ public interface JobDetail extends Serializable, Cloneable {
      * <p>
      * Get the <code>JobDataMap</code> that is associated with the <code>Job</code>.
      * </p>
+     *
      * 返回与该job实例关联的JobDataMap，即该job实例携带的数据；
      */
     public JobDataMap getJobDataMap();
@@ -108,7 +111,7 @@ public interface JobDetail extends Serializable, Cloneable {
     /**
      * @see PersistJobDataAfterExecution
      *
-     * job数据是否持久化
+     * 在job执行后，job的数据是否需要持久化，参考{@link PersistJobDataAfterExecution}
      *
      * @return whether the associated Job class carries the {@link PersistJobDataAfterExecution} annotation.
      */
