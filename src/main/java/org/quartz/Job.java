@@ -33,6 +33,8 @@ package org.quartz;
  * <code>JobDataMap</code> provides a mechanism for 'instance member data'
  * that may be required by some implementations of this interface.
  * </p>
+ *
+ * Job接口，自定义的job需要实现这个接口，且保留默认的构造函数(public，不带参数)；
  * 
  * @see JobDetail
  * @see JobBuilder
@@ -59,6 +61,8 @@ public interface Job {
      * Called by the <code>{@link Scheduler}</code> when a <code>{@link Trigger}</code>
      * fires that is associated with the <code>Job</code>.
      * </p>
+     *
+     * Job是在相关联的trigger被触发时，由scheduler调用执行；
      * 
      * <p>
      * The implementation may wish to set a 
@@ -69,6 +73,10 @@ public interface Job {
      * <code>{@link TriggerListener}s</code> that are watching the job's 
      * execution.
      * </p>
+     *
+     * Job的实现类，可以在execute()退出之前，调用context对象的setResult(Object)方法设置一个对象值，
+     * 这个result对于quartz是没有意义的，但是可以在该job的JobListener和TriggerListener中通过调用
+     * context对象的getResult()方法获取该result值。
      * 
      * @throws JobExecutionException
      *           if there is an exception while executing the job.

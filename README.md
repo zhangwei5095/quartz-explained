@@ -14,8 +14,8 @@
 
 - [JobDetail.java](https://github.com/nkcoder/quartz-explained/blob/master/src%2Fmain%2Fjava%2Forg%2Fquartz%2FJobDetail.java)
 - [JobBuilder.java](https://github.com/nkcoder/quartz-explained/blob/master/src%2Fmain%2Fjava%2Forg%2Fquartz%2FJobBuilder.java)
-- Job.java
-- JobDataMap.java
+- [Job.java](https://github.com/nkcoder/quartz-explained/blob/master/src%2Fmain%2Fjava%2Forg%2Fquartz%2FJob.java)
+- [JobDataMap.java](https://github.com/nkcoder/quartz-explained/blob/master/src%2Fmain%2Fjava%2Forg%2Fquartz%2FJobDataMap.java)
 - JobKey.java
 - JobListener.java
 	
