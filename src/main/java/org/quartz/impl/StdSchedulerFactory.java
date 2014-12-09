@@ -376,6 +376,12 @@ public class StdSchedulerFactory implements SchedulerFactory {
      * method if your application security policy prohibits access to
      * <code>{@link java.lang.System#getProperties()}</code>.
      * </p>
+     *
+     * 加载配置文件'quartz.properties'的顺序：
+     *  1. 系统变量"org.quartz.properties"的值指定的配置文件，比如定义的环境变量，或者命令行上使用-D选项；
+     *  2. 在当前工作目录下查找名为"quartz.properties"的配置文件；
+     *  3. 从"org/quartz"包下加载名为"quartz.properties"的配置文件；
+     *
      */
     public void initialize() throws SchedulerException {
         // short-circuit if already initialized
@@ -386,6 +392,7 @@ public class StdSchedulerFactory implements SchedulerFactory {
             throw initException;
         }
 
+        // 从系统变量/当前目录下查找配置文件
         String requestedFile = System.getProperty(PROPERTIES_FILE);
         String propFileName = requestedFile != null ? requestedFile
                 : "quartz.properties";
@@ -436,6 +443,7 @@ public class StdSchedulerFactory implements SchedulerFactory {
             } else {
                 propSrc = "default resource file in Quartz package: 'quartz.properties'";
 
+                // 从org/quartz包下加载配置文件
                 ClassLoader cl = getClass().getClassLoader();
                 if(cl == null)
                     cl = findClassloader();
@@ -479,6 +487,8 @@ public class StdSchedulerFactory implements SchedulerFactory {
     /**
      * Add all System properties to the given <code>props</code>.  Will override
      * any properties that already exist in the given <code>props</code>.
+     *
+     * 将系统属性覆盖当前属性集
      */
     private Properties overrideWithSysProps(Properties props) {
         Properties sysProps = null;
@@ -1478,6 +1488,12 @@ public class StdSchedulerFactory implements SchedulerFactory {
         }
     }
 
+    /**
+     * 返回属性name的set方法
+     * @param name  字段名
+     * @param props
+     * @return
+     */
     private java.lang.reflect.Method getSetMethod(String name,
             PropertyDescriptor[] props) {
         for (int i = 0; i < props.length; i++) {
@@ -1491,6 +1507,13 @@ public class StdSchedulerFactory implements SchedulerFactory {
         return null;
     }
 
+    /**
+     * 主动加载一个class
+     * @param className
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SchedulerConfigException
+     */
     private Class<?> loadClass(String className) throws ClassNotFoundException, SchedulerConfigException {
 
         try {
@@ -1558,6 +1581,8 @@ public class StdSchedulerFactory implements SchedulerFactory {
      * Returns a handle to the default Scheduler, creating it if it does not
      * yet exist.
      * </p>
+     *
+     * 使用默认配置创建一个Scheduler实例
      *
      * @see #initialize()
      */

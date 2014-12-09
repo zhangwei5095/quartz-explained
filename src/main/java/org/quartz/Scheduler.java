@@ -30,6 +30,8 @@ import java.util.Set;
 
 /**
  * This is the main interface of a Quartz Scheduler.
+ *
+ * Scheduler接口
  * 
  * <p>
  * A <code>Scheduler</code> maintains a registry of <code>{@link org.quartz.JobDetail}</code>s
@@ -37,6 +39,8 @@ import java.util.Set;
  * is responsible for executing <code>Job</code> s when their associated
  * <code>Trigger</code> s fire (when their scheduled time arrives).
  * </p>
+ *
+ * Scheduler负责注册JobDetail和Trigger，当job的trigger被触发时，scheduler会执行对应的job任务；
  * 
  * <p>
  * <code>Scheduler</code> instances are produced by a <code>{@link SchedulerFactory}</code>.
@@ -45,6 +49,8 @@ import java.util.Set;
  * has been created, it is in "stand-by" mode, and must have its 
  * <code>start()</code> method called before it will fire any <code>Job</code>s.
  * </p>
+ * SchedulerFactory用来创建Scheduler, Scheduler创建后需要调用start()方法才能执行job；
+ *
  * 
  * <p>
  * <code>Job</code> s are to be created by the 'client program', by defining

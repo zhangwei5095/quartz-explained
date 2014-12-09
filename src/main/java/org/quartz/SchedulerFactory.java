@@ -23,6 +23,8 @@ import java.util.Collection;
 /**
  * Provides a mechanism for obtaining client-usable handles to <code>Scheduler</code>
  * instances.
+ *
+ * 返回Scheduler的引用，以便client端可以使用
  * 
  * @see Scheduler
  * @see org.quartz.impl.StdSchedulerFactory
