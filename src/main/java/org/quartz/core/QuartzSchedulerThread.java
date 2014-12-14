@@ -39,6 +39,8 @@ import org.slf4j.LoggerFactory;
  * s that are registered with the <code>{@link QuartzScheduler}</code>.
  * </p>
  *
+ * 定义触发trigger的线程
+ *
  * @see QuartzScheduler
  * @see org.quartz.Job
  * @see Trigger

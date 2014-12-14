@@ -78,6 +78,9 @@ public interface JobStore {
     /**
      * Called by the QuartzScheduler to inform the <code>JobStore</code> that
      * the scheduler has started.
+     *
+     * 当scheduler启动的时候，QuartzScheduler调用该方法通知JobStore
+     *
      */
     void schedulerStarted() throws SchedulerException ;
 

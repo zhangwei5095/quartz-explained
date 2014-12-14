@@ -545,6 +545,8 @@ public class QuartzScheduler implements RemotableQuartzScheduler {
      * <p>
      * Starts the <code>QuartzScheduler</code>'s threads that fire <code>{@link org.quartz.Trigger}s</code>.
      * </p>
+     *
+     * 启动QuartzScheduler中的线程，用来触发Trigger
      * 
      * <p>
      * All <code>{@link org.quartz.Trigger}s</code> that have misfired will
@@ -602,6 +604,8 @@ public class QuartzScheduler implements RemotableQuartzScheduler {
      * <p>
      * Temporarily halts the <code>QuartzScheduler</code>'s firing of <code>{@link org.quartz.Trigger}s</code>.
      * </p>
+     *
+     * 暂停QuartzScheduler的执行
      * 
      * <p>
      * The scheduler is not destroyed, and can be re-started at any time.
@@ -836,6 +840,8 @@ public class QuartzScheduler implements RemotableQuartzScheduler {
      * If the given Trigger does not reference any <code>Job</code>, then it
      * will be set to reference the Job passed with it into this method.
      * </p>
+     *
+     * 将jobDetail和trigger关联，并添加到scheduler中
      * 
      * @throws SchedulerException
      *           if the Job or Trigger cannot be added to the Scheduler, or

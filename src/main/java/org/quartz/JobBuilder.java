@@ -193,7 +193,7 @@ public class JobBuilder {
     /**
      * Set the given (human-meaningful) description of the Job.
      *
-     * 描述；
+     * 设置job的描述；
      * 
      * @param jobDescription the description for the Job
      * @return the updated JobBuilder

@@ -601,6 +601,7 @@ public class StdSchedulerFactory implements SchedulerFactory {
      * </p>
      *
      * 使用Properties对象中的配置初始化SchedulerFactory
+     *
      */
     public void initialize(Properties props) throws SchedulerException {
         if (propSrc == null) {

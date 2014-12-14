@@ -254,6 +254,8 @@ public class SimpleScheduleBuilder extends ScheduleBuilder<SimpleTrigger> {
      * Build the actual Trigger -- NOT intended to be invoked by end users,
      * but will rather be invoked by a TriggerBuilder which this 
      * ScheduleBuilder is given to.
+     *
+     * 创建一个Trigger，该方法不是由用户调用的，而是由与该SchedulerBuilder关联的TriggerBuilder调用
      * 
      * @see TriggerBuilder#withSchedule(ScheduleBuilder)
      */

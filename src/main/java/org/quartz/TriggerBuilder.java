@@ -55,6 +55,8 @@ import java.util.Date;
  *         
  *         scheduler.scheduleJob(job, trigger);
  * <pre>
+ *
+ * 主要用来创建Trigger实例
  *  
  * @see JobBuilder
  * @see ScheduleBuilder
@@ -81,6 +83,8 @@ public class TriggerBuilder<T extends Trigger> {
     /**
      * Create a new TriggerBuilder with which to define a 
      * specification for a Trigger.
+     *
+     * 静态方法创建TriggerBuilder实例
      * 
      * @return the new TriggerBuilder
      */
@@ -91,13 +95,7 @@ public class TriggerBuilder<T extends Trigger> {
     /**
      * Produce the <code>Trigger</code>.
      *
-     * 构建trigger实例，对于没有通过builder设置的参数，有的使用默认值，
-     * 有的临时创建：
-     *  - 如果key为null，key的name通过createUniqueName()创建一个唯一值，
-     *  key的group使用默认值：DEFAULT;
-     *  - priority默认值为：5；
-     *  - schedulerBuilder没有设置时，创建一个SimpleScheduleBuilder实例；
-     *  - startTime默认为当前时刻；
+     * 使用属性参数，创建Trigger实例
      * 
      * @return a Trigger that meets the specifications of the builder.
      */

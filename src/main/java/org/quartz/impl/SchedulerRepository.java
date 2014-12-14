@@ -111,6 +111,11 @@ public class SchedulerRepository {
         return schedulers.get(schedName);
     }
 
+    /**
+     * 返回所有的Scheduler，返回结果不可更改
+     *
+     * @return
+     */
     public synchronized Collection<Scheduler> lookupAll() {
         return java.util.Collections
                 .unmodifiableCollection(schedulers.values());

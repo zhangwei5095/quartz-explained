@@ -49,6 +49,7 @@ import java.util.Set;
  * has been created, it is in "stand-by" mode, and must have its 
  * <code>start()</code> method called before it will fire any <code>Job</code>s.
  * </p>
+ *
  * SchedulerFactory用来创建Scheduler, Scheduler创建后需要调用start()方法才能执行job；
  *
  * 
@@ -61,6 +62,9 @@ import java.util.Set;
  * via the <code>scheduleJob(JobDetail, Trigger)</code> or <code>addJob(JobDetail, boolean)</code>
  * method.
  * </p>
+ *
+ * job由用户定义， 实现Job接口；JobDetail是Job的实例，通过方法scheduleJob(JobDetail, Trigger)或addJob(JobDetail, boolean)
+ * 注册到scheduler上。
  * 
  * <p>
  * <code>Trigger</code> s can then be defined to fire individual <code>Job</code>
@@ -70,6 +74,10 @@ import java.util.Set;
  * scheduling based on time of day, day of week, day of month, and month of
  * year.
  * </p>
+ *
+ * Trigger用于触发具体的job，主要有两种类型的trigger：SimpleTrigger和CronTrigger:
+ *  SimpleTrigger: 一次触发，多次重复；
+ *  CronTrigger：类似cron的复杂形式；
  * 
  * <p>
  * <code>Job</code> s and <code>Trigger</code> s have a name and group
@@ -80,6 +88,8 @@ import java.util.Set;
  * given <code>Jobs</code> of <code>Triggers</code>, then you can use the
  * <code>DEFAULT_GROUP</code> constant defined on this interface.
  * </p>
+ *
+ * Trigger和Job都有group和name的概念，group和name唯一标识一个Job实例和Trigger实例；
  * 
  * <p>
  * Stored <code>Job</code> s can also be 'manually' triggered through the use
@@ -95,6 +105,9 @@ import java.util.Set;
  * <code>Scheduler</code> events and errors.  Listeners can be associated with
  * local schedulers through the {@link ListenerManager} interface.  
  * </p>
+ *
+ * 可以为Job、Trigger和Scheduler增加Listener，分别为JobListener, TriggerListener和SchedulerListener；
+ *
  * 
  * <p>
  * The setup/configuration of a <code>Scheduler</code> instance is very
@@ -126,6 +139,8 @@ public interface Scheduler {
     /**
      * A (possibly) useful constant that can be used for specifying the group
      * that <code>Job</code> and <code>Trigger</code> instances belong to.
+     *
+     * 默认分组
      */
     String DEFAULT_GROUP = Key.DEFAULT_GROUP;
 
@@ -133,6 +148,8 @@ public interface Scheduler {
      * A constant <code>Trigger</code> group name used internally by the
      * scheduler - clients should not use the value of this constant
      * ("RECOVERING_JOBS") for the name of a <code>Trigger</code>'s group.
+     *
+     * 内部使用的分组名
      *
      * @see org.quartz.JobDetail#requestsRecovery()
      */
@@ -230,7 +247,9 @@ public interface Scheduler {
      * When a scheduler is first created it is in "stand-by" mode, and will not
      * fire triggers.  The scheduler can also be put into stand-by mode by
      * calling the <code>standby()</code> method. 
-     * 
+     *
+     * 启动scheduler中的线程去执行trigger，在该方法调用之前，scheduler处于stand-by模式；
+     *
      * <p>
      * The misfire/recovery process will be started, if it is the initial call
      * to this method on this scheduler instance.
@@ -251,6 +270,8 @@ public interface Scheduler {
      * (This call does not block). This can be useful within applications that
      * have initializers that create the scheduler immediately, before the
      * resources needed by the executing jobs have been fully initialized.
+     *
+     * 延迟启动scheduler
      *
      * @throws SchedulerException
      *           if <code>shutdown()</code> has been called, or there is an
