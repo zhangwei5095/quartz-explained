@@ -36,22 +36,27 @@ import org.quartz.utils.ClassUtils;
  * <p>
  * Conveys the detail properties of a given <code>Job</code> instance.
  * </p>
- * 
+ *
  * <p>
  * Quartz does not store an actual instance of a <code>Job</code> class, but
  * instead allows you to define an instance of one, through the use of a <code>JobDetail</code>.
  * </p>
- * 
+ *
  * <p>
  * <code>Job</code>s have a name and group associated with them, which
  * should uniquely identify them within a single <code>{@link Scheduler}</code>.
  * </p>
- * 
+ *
  * <p>
  * <code>Trigger</code>s are the 'mechanism' by which <code>Job</code>s
  * are scheduled. Many <code>Trigger</code>s can point to the same <code>Job</code>,
  * but a single <code>Trigger</code> can only point to one <code>Job</code>.
  * </p>
+ *
+ * JobDetailImpl是JobDetail的实现类，用来定义一个job实例，描述Job的各种属性；
+ * 一个job实例由group和name标识，在一个scheduler中必须是唯一的；
+ * Job实例和Trigger之间的对应关系是：一对多。
+ *
  * 
  * @see Job
  * @see StatefulJob
@@ -103,15 +108,13 @@ public class JobDetailImpl implements Cloneable, java.io.Serializable, JobDetail
      * Create a <code>JobDetail</code> with no specified name or group, and
      * the default settings of all the other properties.
      * </p>
-     *
-     * 默认构造函数，使用默认配置；如果使用这个构造函数，则必须先调用setName(),
-     *  setGroup()和setJobClass()三个方法；
      * 
      * <p>
      * Note that the {@link #setName(String)},{@link #setGroup(String)}and
      * {@link #setJobClass(Class)}methods must be called before the job can be
      * placed into a {@link Scheduler}
      * </p>
+     *
      */
     public JobDetailImpl() {
         // do nothing...
@@ -229,7 +232,7 @@ public class JobDetailImpl implements Cloneable, java.io.Serializable, JobDetail
      * Set the group of this <code>Job</code>.
      * </p>
      *
-     * 设置job的group属性，不能为空，如果为null，则使用默认值：DEFAULT；
+     * 设置job的group属性，不能为空，如果为null，则使用默认值；
      * 
      * @param group if <code>null</code>, Scheduler.DEFAULT_GROUP will be used.
      * 
@@ -255,6 +258,9 @@ public class JobDetailImpl implements Cloneable, java.io.Serializable, JobDetail
      * Returns the 'full name' of the <code>JobDetail</code> in the format
      * "group.name".
      * </p>
+     *
+     * 返回job的全标识名：group.name
+     *
      */
     public String getFullName() {
         return group + "." + name;
@@ -299,9 +305,9 @@ public class JobDetailImpl implements Cloneable, java.io.Serializable, JobDetail
      * Set a description for the <code>Job</code> instance - may be useful
      * for remembering/displaying the purpose of the job, though the
      * description has no meaning to Quartz.
+     * </p>
      *
      * 设置job的描述信息，可以描述job的目的，没有实际作用；
-     * </p>
      */
     public void setDescription(String description) {
         this.description = description;
