@@ -26,16 +26,11 @@ import java.util.Map;
 /**
  * Holds state information for <code>Job</code> instances.
  *
- * 保存job实例的状态信息；
- *
  * <p>
  * <code>JobDataMap</code> instances are stored once when the <code>Job</code>
  * is added to a scheduler. They are also re-persisted after every execution of
  * jobs annotated with <code>@PersistJobDataAfterExecution</code>.
  * </p>
- *
- * 当job被加入到scheduler中时，JobDataMap实例被保存；如果job使用@PersistJobDataAfterExecution，
- * 则job每次被执行后都会重新保存；
  * 
  * <p>
  * <code>JobDataMap</code> instances can also be stored with a 
@@ -45,9 +40,6 @@ import java.util.Map;
  * Job with different data inputs.  
  * </p>
  *
- * JobDataMap实例可以保存在Trigger实例中。如果你有一个job，但是有多个关联的trigger，
- * 你希望每一个trigger都有自己的输入数据，则可以使Trigger携带JobDataMap数据；
- * 
  * <p>
  * The <code>JobExecutionContext</code> passed to a Job at execution time 
  * also contains a convenience <code>JobDataMap</code> that is the result
@@ -55,9 +47,16 @@ import java.util.Map;
  * Job's JobDataMap (if any).  
  * </p>
  *
- * 在job执行的时候，传递给job的参数JobExecutionContext对象中包含了一个JobDataMap
- * 实例，该实例对象中的数据是trigger的JobDataMap和job的JobDataMap的并集；
- * 
+ * 保存job的状态信息；
+ *
+ * JobDetail和Trigger都可以使用JobDataMap保存状态信息；
+ *
+ * 当job被添加到scheduler中后，它的JobDataMap数据也同时被保存；
+ * 如果job使用@PersistJobDataAfterExecution注解，则job每次执行后，对应的JobDataMap数据会被重新保存；
+ *
+ * 在job执行的时候，传递给job的参数JobExecutionContext对象中有一个JobDataMap对象，该JobDataMap是Trigger的JobDataMap和
+ * JobDetail的JobDataMap数据的并集。
+ *
  * @see Job
  * @see PersistJobDataAfterExecution
  * @see Trigger

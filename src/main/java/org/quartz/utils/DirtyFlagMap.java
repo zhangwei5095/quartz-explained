@@ -30,6 +30,8 @@ import java.util.Set;
  * and flags itself 'dirty' when it is modified.
  * </p>
  *
+ * Map的一种实现，当被修改时，将自身标记为‘dirty'
+ *
  * @author James House
  */
 public class DirtyFlagMap<K,V> implements Map<K,V>, Cloneable, java.io.Serializable {

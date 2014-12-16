@@ -23,6 +23,8 @@ import java.io.Serializable;
  * and flags itself 'dirty' when it is modified, enforces that all keys are
  * Strings. 
  * </p>
+ *
+ * Map的一种实现，如果被修改了，则将自身标记为’dirty'，同时，抢孩子所有的key都是String类型的；
  * 
  * <p>
  * All allowsTransientData flag related methods are deprecated as of version 1.6.
