@@ -38,6 +38,8 @@ import org.quartz.TriggerUtils;
  * A concrete <code>{@link Trigger}</code> that is used to fire a <code>{@link org.quartz.JobDetail}</code>
  * at a given moment in time, and optionally repeated at a specified interval.
  * </p>
+ *
+ * SimpleTrigger的实现
  * 
  * @see Trigger
  * @see CronTrigger

@@ -95,7 +95,8 @@ public class TriggerBuilder<T extends Trigger> {
     /**
      * Produce the <code>Trigger</code>.
      *
-     * 使用属性参数，创建Trigger实例
+     * 首先通过scheduleBuilder创建一个Trigger对象，然后设置trigger的属性参数；
+     * 参考 {@link org.quartz.SimpleScheduleBuilder#build()}
      * 
      * @return a Trigger that meets the specifications of the builder.
      */

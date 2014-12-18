@@ -49,6 +49,8 @@ import org.quartz.spi.MutableTrigger;
  *         scheduler.scheduleJob(job, trigger);
  * <pre>
  *
+ * 是ScheduleBuilder的一个实现，基于时间间隔构建schedule
+ *
  * @see SimpleTrigger
  * @see CalendarIntervalScheduleBuilder
  * @see CronScheduleBuilder
@@ -66,6 +68,8 @@ public class SimpleScheduleBuilder extends ScheduleBuilder<SimpleTrigger> {
     
     /**
      * Create a SimpleScheduleBuilder.
+     *
+     * 通过static方法来创建一个新对象。
      * 
      * @return the new SimpleScheduleBuilder
      */
@@ -75,6 +79,8 @@ public class SimpleScheduleBuilder extends ScheduleBuilder<SimpleTrigger> {
     
     /**
      * Create a SimpleScheduleBuilder set to repeat forever with a 1 minute interval.
+     *
+     * 间隔时间为1分钟，一直重复。
      * 
      * @return the new SimpleScheduleBuilder
      */
@@ -88,6 +94,8 @@ public class SimpleScheduleBuilder extends ScheduleBuilder<SimpleTrigger> {
     /**
      * Create a SimpleScheduleBuilder set to repeat forever with an interval
      * of the given number of minutes.
+     *
+     * 参数为间隔的时间，一直重复。
      * 
      * @return the new SimpleScheduleBuilder
      */
@@ -153,6 +161,8 @@ public class SimpleScheduleBuilder extends ScheduleBuilder<SimpleTrigger> {
      * of times - 1  with a 1 minute interval.
      * 
      * <p>Note: Total count = 1 (at start time) + repeat count</p>
+     *
+     * 间隔时间为1分钟，总的执行次数为count。
      * 
      * @return the new SimpleScheduleBuilder
      */
@@ -255,7 +265,8 @@ public class SimpleScheduleBuilder extends ScheduleBuilder<SimpleTrigger> {
      * but will rather be invoked by a TriggerBuilder which this 
      * ScheduleBuilder is given to.
      *
-     * 创建一个Trigger，该方法不是由用户调用的，而是由与该SchedulerBuilder关联的TriggerBuilder调用
+     * 创建一个Trigger，该方法不是由用户调用的，而是由与该SchedulerBuilder关联的TriggerBuilder调用.
+     * 参考：{@link org.quartz.TriggerBuilder#build()}
      * 
      * @see TriggerBuilder#withSchedule(ScheduleBuilder)
      */

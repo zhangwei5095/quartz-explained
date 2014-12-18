@@ -20,6 +20,8 @@ package org.quartz;
 /**
  * A <code>{@link Trigger}</code> that is used to fire a <code>Job</code>
  * at a given moment in time, and optionally repeated at a specified interval.
+ *
+ * SimpleTrigger表示在指定的时间触发Job的执行，同时可以指定执行的间隔以及重复的次数。
  * 
  * @see TriggerBuilder
  * @see SimpleScheduleBuilder
@@ -44,6 +46,8 @@ public interface SimpleTrigger extends Trigger {
      * repeat count > 0 then it is equivalent to the instruction <code>{@link #MISFIRE_INSTRUCTION_RESCHEDULE_NOW_WITH_REMAINING_REPEAT_COUNT}
      * </code>.
      * </p>
+     *
+     * misfire策略之一：立即执行，仅用于非重复性的trigger。
      */
     public static final int MISFIRE_INSTRUCTION_FIRE_NOW = 1;
     
@@ -63,6 +67,10 @@ public interface SimpleTrigger extends Trigger {
      * is only an issue if you for some reason wanted to be able to tell what
      * the original values were at some later time).
      * </p>
+     *
+     * misfire策略之一：立即执行job，重复的次数为当前的重复次数（即当前可见的重复次数，不排除misfire的次数）；注意是*立即执行*，
+     * 即使当前时刻被Calendar排除，仍然会执行，但是立即执行和重复执行仍然受到endTime的限制。
+     *
      */
     public static final int MISFIRE_INSTRUCTION_RESCHEDULE_NOW_WITH_EXISTING_REPEAT_COUNT = 2;
     
@@ -91,6 +99,10 @@ public interface SimpleTrigger extends Trigger {
      * to go to the 'COMPLETE' state after firing 'now', if all the
      * repeat-fire-times where missed.
      * </p>
+     *
+     * misfire策略之一：立即执行，重复执行的次数为剩余的重复次数（即如果没有misfire，剩余的重复次数），执行受到endTime的限制；
+     * 该策略与上面的MISFIRE_INSTRUCTION_RESCHEDULE_NOW_WITH_EXISTING_REPEAT_COUNT的区别在于：将misfire的重复次数排除后剩余的
+     * 重复次数。
      */
     public static final int MISFIRE_INSTRUCTION_RESCHEDULE_NOW_WITH_REMAINING_REPEAT_COUNT = 3;
     
@@ -107,6 +119,9 @@ public interface SimpleTrigger extends Trigger {
      * <i>NOTE/WARNING:</i> This instruction could cause the <code>Trigger</code>
      * to go directly to the 'COMPLETE' state if all fire-times where missed.
      * </p>
+     *
+     * misfire的策略之一：在下一次触发事件执行，重复次数为排除misfire的次数后的剩余重复次数；
+     *
      */
     public static final int MISFIRE_INSTRUCTION_RESCHEDULE_NEXT_WITH_REMAINING_COUNT = 4;
     
@@ -124,6 +139,9 @@ public interface SimpleTrigger extends Trigger {
      * to go directly to the 'COMPLETE' state if the end-time of the trigger
      * has arrived.
      * </p>
+     *
+     * misfire的策略之一：下一次触发事件执行，重复的次数为不排除misfire的重复次数；
+     *
      */
     public static final int MISFIRE_INSTRUCTION_RESCHEDULE_NEXT_WITH_EXISTING_COUNT = 5;
     
@@ -133,6 +151,9 @@ public interface SimpleTrigger extends Trigger {
      * other words, the trigger should repeat continually until the trigger's
      * ending timestamp.
      * </p>
+     *
+     * 无限重复的标志。
+     *
      */
     public static final int REPEAT_INDEFINITELY = -1;
 
