@@ -49,7 +49,10 @@ import java.util.TimeZone;
  *         
  *         scheduler.scheduleJob(job, trigger);
  * <pre>
- *  
+ *
+ *  DateBuilder可以很方便地创建Date对象。
+ *
+ *
  * @see TriggerBuilder
  * @see JobBuilder 
  */
@@ -114,6 +117,10 @@ public class DateBuilder {
     
     /**
      * Create a DateBuilder, with initial settings for the current date and time in the system default timezone.
+     *
+     * 私有构造函数，默认timezone下的当前日期和时间。
+     * 注意：为什么仅有month要加1，因为在Gregorian and Julian日历中，一月January的值为0. 参考：{@link java.util.Calendar#MONTH}
+     *
      */
     private DateBuilder() {
         Calendar cal = Calendar.getInstance();
@@ -128,6 +135,9 @@ public class DateBuilder {
 
     /**
      * Create a DateBuilder, with initial settings for the current date and time in the given timezone.
+     *
+     * 私有构造函数，获取指定timezone的当前日期和时间。
+     *
      */
     private DateBuilder(TimeZone tz) {
         Calendar cal = Calendar.getInstance(tz);
@@ -228,6 +238,8 @@ public class DateBuilder {
     
     /**
      * Set the hour (0-23) for the Date that will be built by this builder.
+     *
+     * 设置小时。
      */
     public DateBuilder atHourOfDay(int atHour) {
         validateHour(atHour);
@@ -238,6 +250,8 @@ public class DateBuilder {
 
     /**
      * Set the minute (0-59) for the Date that will be built by this builder.
+     *
+     * 设置分钟。
      */
     public DateBuilder atMinute(int atMinute) {
         validateMinute(atMinute);
@@ -248,6 +262,8 @@ public class DateBuilder {
 
     /**
      * Set the second (0-59) for the Date that will be built by this builder, and truncate the milliseconds to 000.
+     *
+     * 设置秒数。
      */
     public DateBuilder atSecond(int atSecond) {
         validateSecond(atSecond);
@@ -322,6 +338,13 @@ public class DateBuilder {
         return this;
     }
 
+    /**
+     * 创建将来的一个日期。
+     *
+     * @param interval
+     * @param unit
+     * @return
+     */
     public static Date futureDate(int interval, IntervalUnit unit) {
         
         Calendar c = Calendar.getInstance();
@@ -332,8 +355,14 @@ public class DateBuilder {
 
         return c.getTime();
     }
-    
 
+
+    /**
+     * 将时间单位映射为Calendar常量。
+     *
+     * @param unit
+     * @return
+     */
     private static int translate(IntervalUnit unit) {
         switch(unit) {
             case DAY : return Calendar.DAY_OF_YEAR;
@@ -353,6 +382,8 @@ public class DateBuilder {
      * Get a <code>Date</code> object that represents the given time, on
      * tomorrow's date.
      * </p>
+     *
+     * 明天的某个时间。
      * 
      * @param second
      *          The value (0-59) to give the seconds field of the date
@@ -407,7 +438,9 @@ public class DateBuilder {
      * Get a <code>Date</code> object that represents the given time, on
      * today's date  (equivalent to {@link #todayAt(int, int, int)}).
      * </p>
-     * 
+     *
+     * 今天的某个时间。
+     *
      * @param second
      *          The value (0-59) to give the seconds field of the date
      * @param minute
@@ -953,6 +986,8 @@ public class DateBuilder {
      * Translate a date & time from a users time zone to the another
      * (probably server) time zone to assist in creating a simple trigger with 
      * the right date & time.
+     *
+     * 将日期从一个timezone转换为另一个timezone下的日期。
      * 
      * @param date the date to translate
      * @param src the original time-zone
@@ -984,7 +1019,7 @@ public class DateBuilder {
     }
 
     /**
-     * `小时`的合法范围：[0,23]
+     * `小时`的合法范围：[0, 23]
      *
      * @param hour
      */
@@ -996,7 +1031,7 @@ public class DateBuilder {
     }
 
     /**
-     * `分钟`的合法范围：[0,59]
+     * `分钟`的合法范围：[0, 59]
      *
      * @param minute
      */

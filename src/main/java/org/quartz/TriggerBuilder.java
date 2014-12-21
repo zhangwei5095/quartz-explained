@@ -180,7 +180,7 @@ public class TriggerBuilder<T extends Trigger> {
     /**
      * Set the given (human-meaningful) description of the Trigger.
      *
-     * 给trigger添加描述，默认为null，所以是可选的
+     * 给trigger添加描述，默认为null，所以是可选的.
      * 
      * @param triggerDescription the description for the Trigger
      * @return the updated TriggerBuilder
@@ -212,6 +212,8 @@ public class TriggerBuilder<T extends Trigger> {
     /**
      * Set the name of the {@link Calendar} that should be applied to this
      * Trigger's schedule.
+     *
+     * 设置Calendar的名称
      * 
      * @param calName the name of the Calendar to reference.
      * @return the updated TriggerBuilder
@@ -228,6 +230,8 @@ public class TriggerBuilder<T extends Trigger> {
      * not fire at this time - depending upon the schedule configured for
      * the Trigger.  However the Trigger will NOT fire before this time,
      * regardless of the Trigger's schedule.
+     *
+     * 设置trigger第一次被触发的时间，trigger触发的时间不会早于这个时间点。
      *  
      * @param triggerStartTime the start time for the Trigger.
      * @return the updated TriggerBuilder
@@ -242,7 +246,9 @@ public class TriggerBuilder<T extends Trigger> {
     /**
      * Set the time the Trigger should start at to the current moment - 
      * the trigger may or may not fire at this time - depending upon the 
-     * schedule configured for the Trigger.  
+     * schedule configured for the Trigger.
+     *
+     * 设置调度器从现在开始调度trigger。
      * 
      * @return the updated TriggerBuilder
      * @see Trigger#getStartTime()
@@ -275,6 +281,9 @@ public class TriggerBuilder<T extends Trigger> {
      * 
      * <p>The particular <code>SchedulerBuilder</code> used will dictate
      * the concrete type of Trigger that is produced by the TriggerBuilder.</p>
+     *
+     * 设置ScheduleBuilder，该ScheduleBuilder用于创建trigger。
+     * 参考：{@link org.quartz.TriggerBuilder#build()}
      * 
      * @param schedBuilder the SchedulerBuilder to use.
      * @return the updated TriggerBuilder
