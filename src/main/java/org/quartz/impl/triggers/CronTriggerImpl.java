@@ -17,20 +17,12 @@
 
 package org.quartz.impl.triggers;
 
+import org.quartz.*;
+
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
-
-import org.quartz.CronExpression;
-import org.quartz.CronScheduleBuilder;
-import org.quartz.CronTrigger;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
-import org.quartz.ScheduleBuilder;
-import org.quartz.Scheduler;
-import org.quartz.Trigger;
-import org.quartz.TriggerUtils;
 
 
 /**
@@ -38,6 +30,8 @@ import org.quartz.TriggerUtils;
  * A concrete <code>{@link Trigger}</code> that is used to fire a <code>{@link org.quartz.JobDetail}</code>
  * at given moments in time, defined with Unix 'cron-like' definitions.
  * </p>
+ *
+ * cron trigger的实现类。
  * 
  * 
  * @author Sharada Jambula, James House
@@ -46,7 +40,7 @@ import org.quartz.TriggerUtils;
 public class CronTriggerImpl extends AbstractTrigger<CronTrigger> implements CronTrigger, CoreTrigger {
 
     /*
-     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      * 
      * Constants.
      * 
@@ -97,6 +91,9 @@ public class CronTriggerImpl extends AbstractTrigger<CronTrigger> implements Cro
      * The start-time will also be set to the current time, and the time zone
      * will be set the the system's default time zone.
      * </p>
+     *
+     * 默认配置的构造函数。
+     *
      */
     public CronTriggerImpl() {
         super();
@@ -402,6 +399,8 @@ public class CronTriggerImpl extends AbstractTrigger<CronTrigger> implements Cro
      * Get the time at which the <code>CronTrigger</code> should quit
      * repeating - even if repeastCount isn't yet satisfied.
      * </p>
+     *
+     * 获取结束时间。
      * 
      * @see #getFinalFireTime()
      */

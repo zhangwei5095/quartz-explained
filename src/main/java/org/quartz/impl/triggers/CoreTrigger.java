@@ -20,7 +20,9 @@ package org.quartz.impl.triggers;
 import org.quartz.Trigger;
 
 /**
- * internal interface preserved for backward compatibility 
+ * internal interface preserved for backward compatibility
+ *
+ * 用于向后兼容的接口
  */
 public interface CoreTrigger extends Trigger {
 

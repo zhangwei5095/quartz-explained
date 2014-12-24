@@ -51,6 +51,8 @@ import java.util.TimeZone;
  * scheduler.scheduleJob(job, trigger);
  * 
  * <pre>
+ *
+ * 基于cron表达式创建ScheduleBuilder对象
  * 
  * @see CronExpression
  * @see CronTrigger
@@ -64,6 +66,11 @@ public class CronScheduleBuilder extends ScheduleBuilder<CronTrigger> {
     private CronExpression cronExpression;
     private int misfireInstruction = CronTrigger.MISFIRE_INSTRUCTION_SMART_POLICY;
 
+    /**
+     * 构造函数，参数为CronExpression对象
+     *
+     * @param cronExpression
+     */
     protected CronScheduleBuilder(CronExpression cronExpression) {
         if (cronExpression == null) {
             throw new NullPointerException("cronExpression cannot be null");
@@ -75,6 +82,8 @@ public class CronScheduleBuilder extends ScheduleBuilder<CronTrigger> {
      * Build the actual Trigger -- NOT intended to be invoked by end users, but
      * will rather be invoked by a TriggerBuilder which this ScheduleBuilder is
      * given to.
+     *
+     * 创建具体的基于cron的trigger。
      * 
      * @see TriggerBuilder#withSchedule(ScheduleBuilder)
      */
@@ -95,9 +104,7 @@ public class CronScheduleBuilder extends ScheduleBuilder<CronTrigger> {
      * which is presumed to b e valid cron expression (and hence only a
      * RuntimeException will be thrown if it is not).
      *
-     * 通过参数表示的cron表达式创建一个CronScheduleBuilder实例，如果参数不是合法
-     * 的cron表达式，则会抛出RuntimeException；(提示：可以通过
-     * CronExpression.isValidExpression()方法判断cron表达式是否合法)
+     * 通过cron字符串表达式构建实例
      * 
      * @param cronExpression
      *            the cron expression string to base the schedule on.
@@ -164,6 +171,8 @@ public class CronScheduleBuilder extends ScheduleBuilder<CronTrigger> {
     /**
      * Create a CronScheduleBuilder with a cron-expression that sets the
      * schedule to fire every day at the given time (hour and minute).
+     *
+     * 每天在指定的时间执行，根据这个调度创建一个cron表达式，然后创建实例。
      * 
      * @param hour
      *            the hour of day to fire
@@ -229,6 +238,8 @@ public class CronScheduleBuilder extends ScheduleBuilder<CronTrigger> {
      * Create a CronScheduleBuilder with a cron-expression that sets the
      * schedule to fire one per week on the given day at the given time (hour
      * and minute).
+     *
+     * 调度计划：每周的某一天，在指定的时间（小时和分钟）执行
      * 
      * @param dayOfWeek
      *            the day of the week to fire
@@ -262,6 +273,8 @@ public class CronScheduleBuilder extends ScheduleBuilder<CronTrigger> {
      * Create a CronScheduleBuilder with a cron-expression that sets the
      * schedule to fire one per month on the given day of month at the given
      * time (hour and minute).
+     *
+     * 调度计划：每月的某一天，在指定的时间（小时和分钟）执行。
      * 
      * @param dayOfMonth
      *            the day of the month to fire
